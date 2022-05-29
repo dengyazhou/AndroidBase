@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".MainActivity">-->
+
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Hello World!"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_one"
+        android:text="@string/tv_one"
+        android:textColor="@color/red_dyz1"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:gravity="center_vertical"
+
+        android:shadowColor="@color/red_dyz"
+        android:shadowRadius="3.0"
+        android:shadowDx="10.0"
+        android:shadowDy="10.0"
+
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+
+        android:layout_width="300dp"
+        android:layout_height="200dp"/>
+
+    <com.example.androidbase.MyTextView
+        android:id="@+id/tv_two"
+        android:text="@string/tv_one"
+        android:textColor="@color/red_dyz1"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:gravity="center_vertical"
+
+        android:shadowColor="@color/red_dyz"
+        android:shadowRadius="3.0"
+        android:shadowDx="10.0"
+        android:shadowDy="10.0"
+
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+
+        android:layout_width="300dp"
+        android:layout_height="200dp"/>
+
+    <TextView
+        android:text="数数科技ABCDEFGHIJKLMN 上海解封"
+        android:textColor="@color/red_dyz1"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:gravity="center_vertical"
+
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+
+        android:layout_width="300dp"
+        android:layout_height="200dp">
+        <requestFocus/>
+    </TextView>
+
+</LinearLayout>
