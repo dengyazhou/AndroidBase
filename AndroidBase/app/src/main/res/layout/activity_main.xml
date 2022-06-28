@@ -29,7 +29,6 @@
         android:textStyle="bold"
         android:textSize="30sp"
         android:gravity="center_vertical"
-
         android:shadowColor="@color/red_dyz"
         android:shadowRadius="3.0"
         android:shadowDx="10.0"
