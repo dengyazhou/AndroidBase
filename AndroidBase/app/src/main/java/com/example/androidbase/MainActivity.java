@@ -19,6 +19,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 打印
+        Log.v("DYZ","v 打印 你好世界");
+        Log.d("DYZ","d 打印 你好世界");
+        Log.i("DYZ","i 打印 你好世界");
+        Log.w("DYZ","w 打印 你好世界");
+        Log.e("DYZ","e 打印 你好世界");
+
         // 开始
 //        setContentView(R.layout.activity_main);
 //        TextView tv_one = findViewById(R.id.tv_two);
@@ -26,44 +33,44 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Button
-//        setContentView(R.layout.activity_button);
-//        Button btn = findViewById(R.id.btn);
-//        // 点击事件
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.e(TAG, "onClick");
-//            }
-//        });
-//        // 长按事件
-//        btn.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View view) {
-//                Log.e(TAG, "onLong");
-//                return false;
-//            }
-//        });
-//        // 触摸事件
-//        btn.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                Log.e(TAG, "onTouch: " + motionEvent.getAction());
-//                return false;
-//            }
-//        });
-
-        // EditText
-        setContentView(R.layout.activity_edittext);
+        setContentView(R.layout.activity_button);
         Button btn = findViewById(R.id.btn);
-        EditText et = findViewById(R.id.et);
-        eText = et;
+        // 点击事件
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String text = et.getText().toString();
-                Log.e("TD", text);
+                Log.e(TAG, "onClick");
             }
         });
+        // 长按事件
+        btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Log.e(TAG, "onLong");
+                return false;
+            }
+        });
+        // 触摸事件
+        btn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.e(TAG, "onTouch: " + motionEvent.getAction());
+                return false;
+            }
+        });
+
+        // EditText
+//        setContentView(R.layout.activity_edittext);
+//        Button btn = findViewById(R.id.btn);
+//        EditText et = findViewById(R.id.et);
+//        eText = et;
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String text = et.getText().toString();
+//                Log.e("TD", text);
+//            }
+//        });
     }
 
     public void dyzOnCliok(View view) {
