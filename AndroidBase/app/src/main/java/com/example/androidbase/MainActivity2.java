@@ -62,7 +62,10 @@ public class MainActivity2 extends AppCompatActivity {
         Log.e(TAGDYZ, "onclick1 xml:");
 
         // 1、SharedPreferences 本地存储
-        startActivity(new Intent(this, MainActivity3.class));
+//        startActivity(new Intent(this, MainActivity3.class));
+
+        // 2、Future
+        startActivity(new Intent(this, FutureActivity.class));
     }
 
     public void dyzOnClick2(View view) {
