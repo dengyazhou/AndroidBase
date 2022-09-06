@@ -58,9 +58,14 @@ public class MainActivity2 extends AppCompatActivity {
         Log.v(TAGDYZ1,"----->>>>>2>>>>>>>onDestroy()");
     }
 
-    public void dyzOnCliok2(View view) {
-        Log.e(TAGDYZ, "onclick2 xml:");
+    public void dyzOnClick1(View view) {
+        Log.e(TAGDYZ, "onclick1 xml:");
 
-//        startActivity(new Intent(this, MainActivity2.class));
+        // 1、SharedPreferences 本地存储
+        startActivity(new Intent(this, MainActivity3.class));
+    }
+
+    public void dyzOnClick2(View view) {
+        Log.e(TAGDYZ, "onclick2 xml");
     }
 }
