@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class ApplicationDYZ extends Application {
-    private final String TAGDYZ1 = "Activity";
+    private final String TAGDYZ1 = "========>>>>>>>>>Application:Activity";
 
     @Override
     public void onCreate() {

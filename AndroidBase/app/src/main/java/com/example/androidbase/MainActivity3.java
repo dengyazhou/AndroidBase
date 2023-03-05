@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity3 extends AppCompatActivity {
-    private final String TAGDYZ1 = "Activity";
+    private final String TAGDYZ1 = "Activity生命周期";
     private final static String PREFERENCES_NAME = "Testabc";
 
     private SharedPreferences sp;

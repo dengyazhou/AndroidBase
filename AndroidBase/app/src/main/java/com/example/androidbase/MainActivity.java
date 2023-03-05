@@ -2,6 +2,8 @@ package com.example.androidbase;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,10 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.androidbase.ActivityLifecycle.DyzActivityLifecycleCallbacks;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAGDYZ = "DYZ";
-    private final String TAGDYZ1 = "Activity";
+    private final String TAGDYZ1 = "Activity生命周期";
 
     private EditText eText;
 
@@ -34,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 //        TextView tv_one = findViewById(R.id.tv_two);
 //        tv_one.setText("你好世界！Hello World!123456789ABCDFG");
 
-
         // Button
         setContentView(R.layout.activity_button);
         Button btn = findViewById(R.id.btn1);
@@ -45,22 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAGDYZ, "onClick1");
             }
         });
-        // 长按事件
-        btn.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Log.e(TAGDYZ, "onLong");
-                return false;
-            }
-        });
-        // 触摸事件
-        btn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                Log.e(TAGDYZ, "onTouch: " + motionEvent.getAction());
-                return false;
-            }
-        });
+
 
         // EditText
 //        setContentView(R.layout.activity_edittext);
@@ -74,6 +62,21 @@ public class MainActivity extends AppCompatActivity {
 //                Log.e("TD", text);
 //            }
 //        });
+    }
+
+    // 进入主界面
+    public void dyzOnClick(View view) {
+        Log.e(TAGDYZ, "onclick xml:");
+        startActivity(new Intent(this, MainActivity2.class));
+    }
+
+    // Activity生命周期回调
+    public void dyzOnClick1(View view) {
+        Log.e(TAGDYZ, "Activity生命周期回调");
+        DyzActivityLifecycleCallbacks dyzActivityLifecycleCallbacks = new DyzActivityLifecycleCallbacks();
+
+        final Application app = (Application) this.getApplicationContext();
+        app.registerActivityLifecycleCallbacks(dyzActivityLifecycleCallbacks);
     }
 
     @Override
@@ -110,12 +113,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.v(TAGDYZ1,"----->>>>>1>>>>>>>onDestroy()");
-    }
-
-    public void dyzOnCliok(View view) {
-        Log.e(TAGDYZ, "onclick xml:");
-
-        startActivity(new Intent(this, MainActivity2.class));
     }
 
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="DYZDisPresetProperties">
+        <item>#disk</item>
+        <item>#fps</item>
+        <item>#ram</item>
+        <item>ABC</item>
+        <item>DEF</item>
+        <item>HGL</item>
+    </string-array>
+
+
+    <integer name="DYZRetentionDays">10000</integer>
+    <string name="DYZName">Resources只能读取放在res的values中的内容</string>
+
+</resources>

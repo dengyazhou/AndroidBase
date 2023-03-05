@@ -9,16 +9,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <Button
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="第三个界面按钮1 存储"
-        android:onClick="onClickDYZ1"/>
+        android:text="HanderThread界面"
+        android:textAlignment="center"
+        android:background="@color/red_dyz"/>
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:onClick="onClickDYZ2"
-        android:text="第三个界面按钮2 取值"/>
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:text="按钮"
+        android:onClick="onClickHanderThread"/>
 
 </LinearLayout>

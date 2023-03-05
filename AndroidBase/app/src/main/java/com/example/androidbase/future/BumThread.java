@@ -1,5 +1,7 @@
 package com.example.androidbase.future;
 
+import android.util.Log;
+
 public class BumThread extends Thread{
     @Override
     public void run() {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="DYZName1">Resources只能读取放在res的values中的内容</string>
+
+</resources>
