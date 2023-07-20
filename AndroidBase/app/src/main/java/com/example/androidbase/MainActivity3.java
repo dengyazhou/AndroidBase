@@ -65,15 +65,16 @@ public class MainActivity3 extends AppCompatActivity {
         Log.v("ABC","第三个界面第一个按钮点击 存储");
 
 //        https://www.jianshu.com/p/e6d8f4913f12
+        // 其中的原理是通过Android系统生成一个xml文件保到：/data/data/包名/shared_prefs目录下，类似键值对的方式来存储数据。
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("uid", "hehehe123");
+        editor.putString("uid2", "hehehe2");
         editor.commit();
     }
 
     public void onClickDYZ2(View view) {
         Log.v("ABC", "第三个界面第二个按钮点击 取值");
 
-        String str = sp.getString("uid","12345");
+        String str = sp.getString("uid2","12345");//如果取不到值，则返回默认值12345
         Log.v("HHHH", str);
     }
 }

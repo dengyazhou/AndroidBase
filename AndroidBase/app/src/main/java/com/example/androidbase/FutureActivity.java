@@ -27,25 +27,27 @@ public class FutureActivity extends AppCompatActivity {
 
     public void onClickThread(View view) {
         Log.v(TAG, "Thread");
+        String nameold = Thread.currentThread().getName();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("新线程开始执行");
+                String name = Thread.currentThread().getName();
+                System.out.println("新线程开始执行>>" + name);
                 try {
                     Thread.sleep(3000);
-                    System.out.println("新线程执行完毕");
+                    System.out.println("新线程执行完毕>>" + name);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
-        System.out.println("开始Thread");
+        System.out.println("开始Thread>>" + nameold);
 //        try {
-//            Thread.sleep(1000);
+//            Thread.sleep(4000);
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-//        System.out.println("原来线程执行结束");
+        System.out.println("原来线程执行结束>>" + nameold);
     }
 
     public void onClickDYZ(View view) {
@@ -84,11 +86,14 @@ public class FutureActivity extends AppCompatActivity {
         Callable ca1 = new Callable() {
             @Override
             public String call() throws Exception {
+                String name = Thread.currentThread().getName();
+                System.out.println("凉菜 新线程开始执行>>" + name);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                System.out.println("凉菜 新线程执行完毕>>" + name);
                 return "凉菜准备完毕";
             }
         };
@@ -99,19 +104,28 @@ public class FutureActivity extends AppCompatActivity {
         Callable ca2 = new Callable() {
             @Override
             public String call() throws Exception {
+                String name = Thread.currentThread().getName();
+                System.out.println("包子 新线程开始执行>>" + name);
                 try {
                     Thread.sleep(1000*3);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                System.out.println("包子 新线程执行完毕>>" + name);
                 return "包子准备完毕";
             }
         };
         FutureTask<String> ft2 = new FutureTask<String>(ca2);
         new Thread(ft2).start();
 
-        System.out.println(ft1.get());
-        System.out.println(ft2.get());
+        //1、调用get返回call方法的返回值
+        //2、不管有没有调用get，call方法都会执行，只是必须 等待call方法执行完毕 才能拿到返回值
+        //3、如果call方法没有执行完毕，必须等待，执行完毕后才能执行get之后的代码
+//        ft1.get();
+//        System.out.println("准备完毕时间:AAA");
+//        ft2.get();
+//        System.out.println(ft1.get());
+//        System.out.println(ft2.get());
 
         long end = System.currentTimeMillis();
         System.out.println("准备完毕时间：" + (end-start));
@@ -125,11 +139,14 @@ public class FutureActivity extends AppCompatActivity {
         Callable ca1 = new Callable() {
             @Override
             public String call() throws Exception {
+                String name = Thread.currentThread().getName();
+                System.out.println("凉菜 新线程开始执行>>" + name);
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                System.out.println("凉菜 新线程执行完毕>>" + name);
                 return "凉菜准备完毕1";
             }
         };

@@ -36,6 +36,12 @@
     <Button
         android:layout_width="200dp"
         android:layout_height="100dp"
+        android:text="按钮Looper"
+        android:onClick="onClickLooper"/>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:text="按钮HanderThread"
         android:onClick="onClickHanderThread"/>
 

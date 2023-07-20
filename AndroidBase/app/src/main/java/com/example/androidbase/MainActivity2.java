@@ -10,13 +10,16 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.os.Looper;
 import android.provider.Settings;
-import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Choreographer;
@@ -26,21 +29,25 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewbinding.BuildConfig;
-
-import com.example.androidbase.crash.DyzJavaExceptionHandler;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 
@@ -110,7 +117,10 @@ public class MainActivity2 extends AppCompatActivity {
 //        boolean exists = file.exists();
 //        Log.v(TAGDYZ,"fileName: " + fileName);
 //        Log.v(TAGDYZ,"exists: " + exists);
-//
+
+        //1、adb -d shell 直接连接真机
+        //2、/storage/emulated/0/Download/ta_log_controller 为 步骤1 链接真机后直接ls可看到。
+        //3、/storage/emulated/0/Download/ 为系统文件夹，属于系统，每个App都可以使用。
 //        boolean exists_ta_log_controller = new File("/storage/emulated/0/Download/ta_log_controller").exists();
 //        Log.v(TAGDYZ,"exists_ta_log_controller: " + exists_ta_log_controller);
 
@@ -131,7 +141,6 @@ public class MainActivity2 extends AppCompatActivity {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
 
 //        TODO 4、Resources，Resources只能读取放在res的values中的内容
 //        Context context = this.getApplicationContext();
@@ -202,12 +211,12 @@ public class MainActivity2 extends AppCompatActivity {
 //        display.getRealSize(point);
 //        screenWidth = point.x;
 //        screenHeight = point.y;
-////
+//
 ////        Point point1 = new Point();
 ////        display.getSize(point1);
 ////        screenWidth = point1.x;
 ////        screenHeight = point1.y;
-////
+//
 ////        screenWidth = display.getWidth();
 ////        screenHeight = display.getHeight();
 //        Log.v("======>>>>>>>>w:", String.valueOf(screenWidth));
@@ -222,7 +231,7 @@ public class MainActivity2 extends AppCompatActivity {
 //        hashMap.put("100","Google");
 //        hashMap.put("200","Runoob");
 //        Log.v("key1",hashMap.get("100"));
-
+//
 //        Map map = new HashMap();
 //        map.put("duration", 12);
 //        map.put("duration1", "12");
@@ -263,6 +272,9 @@ public class MainActivity2 extends AppCompatActivity {
 //        Log.v(TAGDYZ,"android_id:" + android_id);
 
         // 随机数
+//        double random = Math.random();
+//        Log.v(TAGDYZ,"random:" + random);//例如 0.753129868788929、0.6530360285628827
+
 //        StringBuilder str = new StringBuilder();
 //        for (int i = 0; i < 16; i++) {
 //            char temp = 0;
@@ -281,13 +293,11 @@ public class MainActivity2 extends AppCompatActivity {
 //        }
 //        String random = str.toString();
 //        Log.v(TAGDYZ,"random:" + random);
-//
+
+
+
 //        String uuid = UUID.randomUUID().toString();
-//        Log.v(TAGDYZ,"UUID:" + uuid);
-
-
-//        5e699de1-28f1-43ba-ac6c-788467e4f767
-
+//        Log.v(TAGDYZ,"UUID:" + uuid);// 5e699de1-28f1-43ba-ac6c-788467e4f767
 
 
         // 11、Locale 获取本地语言、国家
@@ -355,20 +365,10 @@ public class MainActivity2 extends AppCompatActivity {
         // getprop ro.kernel.qemu
         // getprop ro.product.cpu.abi
 
-//        this.getMainLooper();
-//        Looper.myLooper();
-//        Looper.getMainLooper();
 
-        // 13、Hander
-//        Intent activity = new Intent(this, HandlerActivity.class);
-//        startActivity(activity);
-
-        // 13、HandlerThread
-//        startActivity(new Intent(this,HandlerThreadActivity.class));
-
-        // 14、Build.MODEL
-//        String str = Build.MODEL;
-//        Log.v(TAGDYZ, str);
+        // 13、Hander、HandlerThread
+        Intent activity = new Intent(this, HandlerActivity.class);
+        startActivity(activity);
 
         // 15、打开app
 //        Log.v(TAGDYZ,"来了 打开app");
@@ -376,7 +376,7 @@ public class MainActivity2 extends AppCompatActivity {
 //        intent.setAction("android.intent.action.VIEW");
 ////        ComponentName name = new ComponentName("cn.thinkingdata.sensordemo", "cn.thinkingdata.sensordemo.MainActivity");
 //        intent.putExtra("key1", "value1");
-//        intent.setData(Uri.parse("night://lolita"));
+//        intent.setData(Uri.parse("schemeAAA://hostBBB"));// 打开"TATest_Android"app
 ////        intent.setComponent(name);
 ////        intent.setClass(MainActivity.this, SecondActivity.class);
 //        startActivity(intent);
@@ -412,7 +412,8 @@ public class MainActivity2 extends AppCompatActivity {
 //        long availableSize = memoryInfo.availMem;
 //        double total = totalSize / 1024.0 / 1024.0 / 1024.0;
 //        double available = availableSize / 1024.0 / 1024.0 / 1024.0;
-//        Log.v("===>>>>",available + "/" + total);
+//        int v = Log.v("===>>>>", available + "/" + total);
+
 
         // 21、数数 #deviceType
 //        Context context = this.getApplicationContext();
@@ -425,10 +426,38 @@ public class MainActivity2 extends AppCompatActivity {
         // 22、zone_offset
 //        TimeZone timeZone = TimeZone.getDefault();
 //        Date date = new Date();
+//        Log.v("===>>>>", date.toString());
 //        long impl = date.getTime();//时间戳
 //        double offset = timeZone.getOffset(impl) / (1000.0 * 60 * 60);
 //        Log.v("===>>>>", "impl:" + impl);
 //        Log.v("===>>>>", "offset:" + offset);
+
+        // 23、SimpleDateFormat  Date转字符串
+//        TimeZone timeZone = TimeZone.getDefault();
+////        TimeZone timeZone = TimeZone.getTimeZone("GMT+08:00");
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS",Locale.CHINA);
+//        dateFormat.setTimeZone(timeZone);
+//        Date date = new Date();
+//        String ret = dateFormat.format(date);
+//        Log.v("===>>>>","ret:" + ret);
+
+        // 24、TimerTask、Timer
+//        TimerTask task = new TimerTask() {
+//            @Override
+//            public void run() {
+//                // 一个新线程
+//                Log.v("===>>>>","TimerTask run 执行了");
+//                Log.v("===>>>> 当前线程 run", Thread.currentThread().getName());
+//            }
+//        };
+//        Timer timer = new Timer();
+//        timer.schedule(task,3000);
+//        Log.v("===>>>> 当前线程 000", Thread.currentThread().getName());
+
+
+
+//        Log.v("aaaa","bb");
+
 
 
     }

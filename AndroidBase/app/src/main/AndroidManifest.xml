@@ -35,7 +35,6 @@
         <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity3" />
         <activity android:name=".FutureActivity" />
-        <activity android:name=".HandlerThreadActivity" />
     </application>
 
 </manifest>
